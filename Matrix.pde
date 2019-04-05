@@ -19,10 +19,11 @@ void setup(){
     stroke(255);
     background(0);
     rectMode(CORNERS);
-    frameRate(20);
+    frameRate(60);
 
     alphabet = buildAlphabet(charRanges);
     matrix = new CellMatrix(numCols, numRows);
+    matrix.startRow(0);
 
 }
 
@@ -31,6 +32,15 @@ void draw(){
     background(0);
     matrix.step();
     matrix.draw();
+    
+    if(random(1) < 0.1){
+    
+        int i = int(random(0, numCols));
+        
+        println(i);
+        matrix.startRow(i);
+    
+    }
     
 }
 

@@ -1,3 +1,6 @@
+final int DEFAULT_LIFETIME = 120;
+final int DEFAULT_CASCADETIME = 10;
+
 class CellMatrix{
 
     Cell[][] matrix;
@@ -20,17 +23,20 @@ class CellMatrix{
             for(int j = 0; j < y; j++)
                 matrix[i][j] = new Cell();
     
-        matrix[0][0].lifetime = 100;
-        matrix[0][0].cascadetime = 50;
-        matrix[0][0].c = alphabet.get(int(random(0, alphabet.size())));
+    }
+    
+    void startRow(int r){
+    
+        matrix[r][0].active = true;
+        matrix[r][0].lifetime = DEFAULT_LIFETIME;
+        matrix[r][0].cascadetime = DEFAULT_CASCADETIME;
+        matrix[r][0].c = alphabet.get(int(random(0, alphabet.size())));
         
-        activeCells.add(new Tuple(0,0));
+        activeCells.add(new Tuple(r,0));    
     
     }
     
     void step(){
-    
-        println(activeCells.size());
         
         for(Tuple<Integer> t : activeCells){
         
@@ -39,17 +45,22 @@ class CellMatrix{
             // Delete the cell if the lifetime is up
             if(cell.lifetime <= 0){
                 
+                cell.active = false;
                 cellsToRemoveFromActiveList.add(t);
             
             }
         
             if(cell.cascadetime <= 0){
-            
-                cellsToAddToActiveList.add(new Tuple(t.first, t.second+1));
-                matrix[t.first][t.second+1].lifetime = 300;
-                matrix[t.first][t.second+1].cascadetime = 50;
-                matrix[t.first][t.second+1].c = alphabet.get(int(random(0, alphabet.size())));
-            
+                
+                if(t.second + 1 < matrix.length && !matrix[t.first][t.second+1].active){
+                
+                    cellsToAddToActiveList.add(new Tuple(t.first, t.second+1));
+                    matrix[t.first][t.second+1].active = true;
+                    matrix[t.first][t.second+1].lifetime = DEFAULT_LIFETIME;
+                    matrix[t.first][t.second+1].cascadetime = DEFAULT_CASCADETIME;
+                    matrix[t.first][t.second+1].c = alphabet.get(int(random(0, alphabet.size())));
+
+                }
             }
         
             cell.lifetime--;
