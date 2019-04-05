@@ -1,7 +1,5 @@
-int cellWidth = 15;
-int cellHeight = 15;
-
-int numCols, numRows;
+int cellSide = 12;
+int numCols, numRows, cellWidth, cellHeight;
 
 Alphabet alphabet;
 CellMatrix matrix;
@@ -9,10 +7,12 @@ CellMatrix matrix;
 void setup(){
     
     fullScreen();
-    textSize(15);
+    textSize(cellSide);
     stroke(255);
     background(0);
     frameRate(60);
+
+    cellWidth = cellHeight = cellSide;
 
     numCols = width / cellWidth;
     numRows = height / cellHeight;
@@ -27,10 +27,11 @@ void setup(){
 void draw(){
 
     background(0);
+    
     matrix.step();
     matrix.draw();
     
-    if(random(1) < 0.20){
+    if(random(1) < 0.30){
     
         matrix.startRow(int(random(0, numCols)));
     

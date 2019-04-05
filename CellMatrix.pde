@@ -1,4 +1,4 @@
-final int DEFAULT_LIFETIME = 250;
+final int DEFAULT_LIFETIME = 300;
 final int DEFAULT_CASCADETIME = 3;
 
 class CellMatrix{
@@ -55,16 +55,23 @@ class CellMatrix{
                 
                 if(t.second + 1 < matrix[0].length && !matrix[t.first][t.second+1].active){
                 
-                    cellsToAddToActiveList.add(new Tuple(t.first, t.second+1));
-                    matrix[t.first][t.second+1].active = true;
-                    matrix[t.first][t.second+1].lifetime = DEFAULT_LIFETIME;
-                    matrix[t.first][t.second+1].cascadetime = DEFAULT_CASCADETIME;
-                    matrix[t.first][t.second+1].c = alphabet.getRandChar();
+                    Cell cellBelow = matrix[t.first][t.second+1];
+                    
+                    if(!cellBelow.active){
+                    
+                        cellsToAddToActiveList.add(new Tuple(t.first, t.second+1));
+                        cellBelow.active = true;
+                    
+                    }
+                    
+                    cellBelow.lifetime = DEFAULT_LIFETIME;
+                    cellBelow.cascadetime = DEFAULT_CASCADETIME;
+                    cellBelow.c = alphabet.getRandChar();
 
                 }
             }
         
-            if(random(1) < 0.01){
+            if(random(1) < 0.005){
             
                 cell.c = alphabet.getRandChar();
             
