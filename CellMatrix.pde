@@ -1,5 +1,5 @@
-final int DEFAULT_LIFETIME = 120;
-final int DEFAULT_CASCADETIME = 10;
+final int DEFAULT_LIFETIME = 250;
+final int DEFAULT_CASCADETIME = 3;
 
 class CellMatrix{
 
@@ -30,7 +30,7 @@ class CellMatrix{
         matrix[r][0].active = true;
         matrix[r][0].lifetime = DEFAULT_LIFETIME;
         matrix[r][0].cascadetime = DEFAULT_CASCADETIME;
-        matrix[r][0].c = alphabet.get(int(random(0, alphabet.size())));
+        matrix[r][0].c = alphabet.getRandChar();
         
         activeCells.add(new Tuple(r,0));    
     
@@ -47,21 +47,37 @@ class CellMatrix{
                 
                 cell.active = false;
                 cellsToRemoveFromActiveList.add(t);
+                continue;
             
             }
         
             if(cell.cascadetime <= 0){
                 
-                if(t.second + 1 < matrix.length && !matrix[t.first][t.second+1].active){
+                if(t.second + 1 < matrix[0].length && !matrix[t.first][t.second+1].active){
                 
                     cellsToAddToActiveList.add(new Tuple(t.first, t.second+1));
                     matrix[t.first][t.second+1].active = true;
                     matrix[t.first][t.second+1].lifetime = DEFAULT_LIFETIME;
                     matrix[t.first][t.second+1].cascadetime = DEFAULT_CASCADETIME;
-                    matrix[t.first][t.second+1].c = alphabet.get(int(random(0, alphabet.size())));
+                    matrix[t.first][t.second+1].c = alphabet.getRandChar();
 
                 }
             }
+        
+            if(random(1) < 0.01){
+            
+                cell.c = alphabet.getRandChar();
+            
+            }
+        
+            /*
+            Color the cell here.
+            */
+            if(cell.lifetime >= DEFAULT_LIFETIME - DEFAULT_CASCADETIME)
+                cell.col = color(255);
+            else
+                cell.col = color(13,222,0, map(cell.lifetime, 0, DEFAULT_LIFETIME, 0, 255));
+            
         
             cell.lifetime--;
             cell.cascadetime--;
@@ -90,7 +106,7 @@ class CellMatrix{
         for(Tuple<Integer> t : activeCells){
         
             Cell cell = matrix[t.first][t.second];
-            putc(cell.c, t.first, t.second, color(255));
+            putc(cell.c, t.first, t.second, cell.col);
         
         }
     
