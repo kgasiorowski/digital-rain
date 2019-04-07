@@ -1,8 +1,41 @@
-int cellSide = 12;
+int cellSide = 15;
 int numCols, numRows, cellWidth, cellHeight;
 
 Alphabet alphabet;
 CellMatrix matrix;
+
+final color GREEN = color(13,222,0);
+final color RED = color(198,0,0);
+final color BLUE = color(23, 45, 214);
+final color YELLOW = color(198, 175, 0);
+final color PURPLE = color(86, 26, 216);
+
+color CURRENT_COLOR = GREEN;
+
+void keyPressed(){
+
+    switch(key){
+    
+        default:
+        case '1':
+            CURRENT_COLOR = GREEN;
+        break;
+        case '2':
+            CURRENT_COLOR = BLUE;
+        break;
+        case '3':
+            CURRENT_COLOR = RED;
+        break;
+        case '4':
+            CURRENT_COLOR = YELLOW;
+        break;
+        case '5':
+            CURRENT_COLOR = PURPLE;
+        break;
+        
+    }
+
+}
 
 void setup(){
     
@@ -25,7 +58,7 @@ void setup(){
 }
 
 void draw(){
-
+    
     background(0);
     
     matrix.step();

@@ -1,4 +1,4 @@
-final int DEFAULT_LIFETIME = 300;
+final int DEFAULT_LIFETIME = 250;
 final int DEFAULT_CASCADETIME = 3;
 
 class CellMatrix{
@@ -6,7 +6,6 @@ class CellMatrix{
     Cell[][] matrix;
     
     ArrayList<Tuple<Integer>> activeCells;
-    
     ArrayList<Tuple<Integer>> cellsToRemoveFromActiveList;
     ArrayList<Tuple<Integer>> cellsToAddToActiveList;
     
@@ -83,7 +82,7 @@ class CellMatrix{
             if(cell.lifetime >= DEFAULT_LIFETIME - DEFAULT_CASCADETIME)
                 cell.col = color(255);
             else
-                cell.col = color(13,222,0, map(cell.lifetime, 0, DEFAULT_LIFETIME, 0, 255));
+                cell.col = color(red(CURRENT_COLOR), green(CURRENT_COLOR), blue(CURRENT_COLOR), map(cell.lifetime, 0, DEFAULT_LIFETIME, 0, 255));
             
         
             cell.lifetime--;
