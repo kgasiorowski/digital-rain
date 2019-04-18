@@ -52,7 +52,7 @@ class CellMatrix{
         
             if(cell.cascadetime <= 0){
                 
-                if(t.second + 1 < matrix[0].length && !matrix[t.first][t.second+1].active){
+                if(t.second + 1 < matrix[0].length && matrix[t.first][t.second+1].lifetime < cell.lifetime/*!matrix[t.first][t.second+1].active*/){
                 
                     Cell cellBelow = matrix[t.first][t.second+1];
                     
