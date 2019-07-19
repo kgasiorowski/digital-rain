@@ -1,4 +1,4 @@
-int cellSide = 20;
+int cellSide;
 int numCols, numRows, cellWidth, cellHeight;
 
 Alphabet alphabet;
@@ -13,7 +13,7 @@ final color PURPLE = color(120, 26, 216);
 color CURRENT_COLOR = GREEN;
 
 void keyPressed(){
-
+    
     switch(key){
     
         default:
@@ -39,6 +39,8 @@ void keyPressed(){
 
 void setup(){
     
+    cellSide = displayWidth/125;
+    
     fullScreen();
     textSize(cellSide);
     stroke(255);
@@ -58,14 +60,12 @@ void setup(){
 
 void draw(){
     
-    println(frameRate);
-    
     background(0);
     
     matrix.step();
     matrix.draw();
     
-    if(random(1) < 0.40){
+    if(random(1) < 0.30){
     
         matrix.startRow();
     
