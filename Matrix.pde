@@ -1,4 +1,4 @@
-int cellSide = 15;
+int cellSide = 20;
 int numCols, numRows, cellWidth, cellHeight;
 
 Alphabet alphabet;
@@ -8,7 +8,7 @@ final color GREEN = color(13,222,0);
 final color RED = color(198,0,0);
 final color BLUE = color(23, 45, 214);
 final color YELLOW = color(198, 175, 0);
-final color PURPLE = color(86, 26, 216);
+final color PURPLE = color(120, 26, 216);
 
 color CURRENT_COLOR = GREEN;
 
@@ -58,12 +58,14 @@ void setup(){
 
 void draw(){
     
+    println(frameRate);
+    
     background(0);
     
     matrix.step();
     matrix.draw();
     
-    if(random(1) < 0.30){
+    if(random(1) < 0.40){
     
         matrix.startRow();
     
