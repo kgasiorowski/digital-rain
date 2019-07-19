@@ -53,7 +53,6 @@ void setup(){
     alphabet = new Alphabet();
 
     matrix = new CellMatrix(numCols, numRows);
-    matrix.startRow(0);
 
 }
 
@@ -66,7 +65,7 @@ void draw(){
     
     if(random(1) < 0.30){
     
-        matrix.startRow(int(random(0, numCols)));
+        matrix.startRow();
     
     }
     

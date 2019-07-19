@@ -24,14 +24,22 @@ class CellMatrix{
     
     }
     
-    void startRow(int r){
+    void startRow(){
     
+        int r;
+        
+        do{
+            
+            r = int(random(0, numCols));
+        
+        }while(matrix[r][0].active);
+        
         matrix[r][0].active = true;
         matrix[r][0].lifetime = DEFAULT_LIFETIME;
         matrix[r][0].cascadetime = DEFAULT_CASCADETIME;
         matrix[r][0].c = alphabet.getRandChar();
         
-        activeCells.add(new Tuple(r,0));    
+        activeCells.add(new Tuple(r,0)); 
     
     }
     
@@ -61,11 +69,15 @@ class CellMatrix{
                         cellsToAddToActiveList.add(new Tuple(t.first, t.second+1));
                         cellBelow.active = true;
                     
+                        cellBelow.lifetime = DEFAULT_LIFETIME;
+                        cellBelow.cascadetime = DEFAULT_CASCADETIME;
+                        cellBelow.c = alphabet.getRandChar();
+                    
                     }
                     
-                    cellBelow.lifetime = DEFAULT_LIFETIME;
-                    cellBelow.cascadetime = DEFAULT_CASCADETIME;
-                    cellBelow.c = alphabet.getRandChar();
+                    //cellBelow.lifetime = DEFAULT_LIFETIME;
+                    //cellBelow.cascadetime = DEFAULT_CASCADETIME;
+                    //cellBelow.c = alphabet.getRandChar();
 
                 }
             }
