@@ -16,7 +16,8 @@ void keyPressed(){
     
     switch(key){
     
-        default:
+        //default:
+        //break;
         case '1':
             CURRENT_COLOR = GREEN;
         break;
@@ -46,6 +47,7 @@ void setup(){
     stroke(255);
     background(0);
     frameRate(60);
+    textAlign(CENTER, CENTER);
 
     cellWidth = cellHeight = cellSide;
 

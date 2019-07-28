@@ -1,4 +1,4 @@
-final int DEFAULT_LIFETIME = 250;
+final int DEFAULT_LIFETIME = 150;
 final int DEFAULT_CASCADETIME = 3;
 
 class CellMatrix{
@@ -74,11 +74,6 @@ class CellMatrix{
                         cellBelow.c = alphabet.getRandChar();
                     
                     }
-                    
-                    //cellBelow.lifetime = DEFAULT_LIFETIME;
-                    //cellBelow.cascadetime = DEFAULT_CASCADETIME;
-                    //cellBelow.c = alphabet.getRandChar();
-
                 }
             }
         
