@@ -1,5 +1,5 @@
-final int DEFAULT_LIFETIME = 150;
-final int DEFAULT_CASCADETIME = 3;
+final int DEFAULT_LIFETIME = 100;
+final int DEFAULT_CASCADETIME = 1;
 
 class CellMatrix{
 

@@ -1,6 +1,11 @@
 int cellSide;
 int numCols, numRows, cellWidth, cellHeight;
 
+int frame_buffer_count = 1000;
+int numFrames = 0;
+int num_frames_to_save = 1200;
+int savedFrames = 0;
+
 Alphabet alphabet;
 CellMatrix matrix;
 
@@ -46,7 +51,7 @@ void setup(){
     textSize(cellSide);
     stroke(255);
     background(0);
-    frameRate(60);
+    frameRate(30);
     textAlign(CENTER, CENTER);
 
     cellWidth = cellHeight = cellSide;
@@ -57,6 +62,7 @@ void setup(){
     alphabet = new Alphabet();
 
     matrix = new CellMatrix(numCols, numRows);
+    rotate(radians(90));
 
 }
 
@@ -67,9 +73,18 @@ void draw(){
     matrix.step();
     matrix.draw();
     
-    if(random(1) < 0.30){
-    
+    if(random(1) < 0.30)
         matrix.startRow();
+    
+    numFrames++;
+    
+    if(numFrames >= frame_buffer_count){
+    
+        saveFrame("img/####.png");
+        savedFrames++;
+    
+        if(savedFrames > num_frames_to_save)
+            exit();
     
     }
     
