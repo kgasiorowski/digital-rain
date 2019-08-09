@@ -1,7 +1,7 @@
 int cellSide;
 int numCols, numRows, cellWidth, cellHeight;
 
-Alphabet alphabet;
+final Alphabet alphabet = new Alphabet();
 CellMatrix matrix;
 
 final color GREEN = color(13,222,0);
@@ -16,8 +16,6 @@ void keyPressed(){
     
     switch(key){
     
-        //default:
-        //break;
         case '1':
             CURRENT_COLOR = GREEN;
         break;
@@ -44,8 +42,6 @@ void setup(){
     
     fullScreen();
     textSize(cellSide);
-    stroke(255);
-    background(0);
     frameRate(60);
     textAlign(CENTER, CENTER);
 
@@ -53,8 +49,6 @@ void setup(){
 
     numCols = width / cellWidth;
     numRows = height / cellHeight;
-
-    alphabet = new Alphabet();
 
     matrix = new CellMatrix(numCols, numRows);
 
