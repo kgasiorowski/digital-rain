@@ -38,11 +38,13 @@ void keyPressed(){
 
 void setup(){
     
-    cellSide = displayWidth/125;
+    cellSide = displayWidth/175;
     
     fullScreen();
     textSize(cellSide);
     frameRate(60);
+    stroke(255);
+    background(0);
     textAlign(CENTER, CENTER);
 
     cellWidth = cellHeight = cellSide;
@@ -51,6 +53,7 @@ void setup(){
     numRows = height / cellHeight;
 
     matrix = new CellMatrix(numCols, numRows);
+    rotate(radians(90));
 
 }
 
@@ -61,11 +64,8 @@ void draw(){
     matrix.step();
     matrix.draw();
     
-    if(random(1) < 0.30){
-    
+    if(random(1) < 0.30)
         matrix.startRow();
-    
-    }
     
 }
 
