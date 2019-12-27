@@ -12,6 +12,12 @@ final color PURPLE = color(120, 26, 216);
 
 color CURRENT_COLOR = GREEN;
 
+void mouseClicked(){
+
+    exit();
+
+}
+
 void keyPressed(){
     
     switch(key){

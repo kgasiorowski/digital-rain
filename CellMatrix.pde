@@ -36,7 +36,8 @@ class CellMatrix{
         
         matrix[r][0].active = true;
         matrix[r][0].lifetime = DEFAULT_LIFETIME;
-        matrix[r][0].cascadetime = DEFAULT_CASCADETIME;
+        //matrix[r][0].cascadetime = DEFAULT_CASCADETIME;
+        matrix[r][0].cascadetime = int(random(1,3));
         matrix[r][0].c = alphabet.getRandChar();
         
         activeCells.add(new Tuple(r,0)); 
@@ -70,7 +71,8 @@ class CellMatrix{
                         cellBelow.active = true;
                     
                         cellBelow.lifetime = DEFAULT_LIFETIME;
-                        cellBelow.cascadetime = DEFAULT_CASCADETIME;
+                        //cellBelow.cascadetime = DEFAULT_CASCADETIME;
+                        cellBelow.cascadetime = int(random(1,3));
                         cellBelow.c = alphabet.getRandChar();
                     
                     }
