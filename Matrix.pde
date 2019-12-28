@@ -9,36 +9,53 @@ final color RED = color(198,0,0);
 final color BLUE = color(23, 45, 214);
 final color YELLOW = color(198, 175, 0);
 final color PURPLE = color(120, 26, 216);
+final color BRIGHT_BLUE = #4771B4;
 
 color CURRENT_COLOR = GREEN;
+int CURRENT_COLOR_INDEX = 0;
 
-void mouseClicked(){
-
-    exit();
-
-}
+final color[] colors = {GREEN, RED, BLUE, YELLOW, PURPLE, BRIGHT_BLUE};
 
 void keyPressed(){
     
-    switch(key){
+    if(key == CODED){
     
-        case '1':
-            CURRENT_COLOR = GREEN;
-        break;
-        case '2':
-            CURRENT_COLOR = BLUE;
-        break;
-        case '3':
-            CURRENT_COLOR = RED;
-        break;
-        case '4':
-            CURRENT_COLOR = YELLOW;
-        break;
-        case '5':
-            CURRENT_COLOR = PURPLE;
-        break;
+        switch(keyCode){
         
+            case LEFT:
+                CURRENT_COLOR_INDEX--;
+                if(CURRENT_COLOR_INDEX < 0)
+                {
+                
+                    CURRENT_COLOR_INDEX = colors.length-1;
+                
+                }
+            break;    
+            case RIGHT:
+                CURRENT_COLOR_INDEX++;
+                if(CURRENT_COLOR_INDEX > colors.length-1)
+                {
+                    
+                    CURRENT_COLOR_INDEX = 0;
+                    
+                }
+            break;
+            
+        }
+    
+    }else{
+    
+        int key_int = (int)key;
+        
+        if(key_int >= 49 && key_int <= 54){
+        
+            CURRENT_COLOR_INDEX = key_int - 49;
+        
+        }
+    
     }
+
+    CURRENT_COLOR = colors[CURRENT_COLOR_INDEX];
 
 }
 
