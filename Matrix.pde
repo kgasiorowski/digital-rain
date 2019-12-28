@@ -76,7 +76,6 @@ void setup(){
     numRows = height / cellHeight;
 
     matrix = new CellMatrix(numCols, numRows);
-    rotate(radians(90));
 
 }
 
@@ -96,6 +95,6 @@ void putc(char c, int x, int y, color col){
 
     stroke(col);
     fill(col);
-    text(c, x*cellWidth, (y+1)*cellHeight);
+    text(c, x*cellWidth, (y+.5)*cellHeight);
     
 }
