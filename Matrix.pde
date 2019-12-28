@@ -1,3 +1,8 @@
+/*
+Author: Kuba Gasiorowski
+https://github.com/kgasiorowski/digital-rain
+*/
+
 int cellSide;
 int numCols, numRows, cellWidth, cellHeight;
 
@@ -16,6 +21,11 @@ int CURRENT_COLOR_INDEX = 0;
 
 final color[] colors = {GREEN, RED, BLUE, YELLOW, PURPLE, BRIGHT_BLUE};
 
+boolean RAINBOW_MODE = false;
+boolean PAUSE_RAINBOW = false;
+final int DEFAULT_RAINBOW_PERIOD = 500;
+int framecounter = 0;
+
 void keyPressed(){
     
     if(key == CODED){
@@ -24,8 +34,7 @@ void keyPressed(){
         
             case LEFT:
                 CURRENT_COLOR_INDEX--;
-                if(CURRENT_COLOR_INDEX < 0)
-                {
+                if(CURRENT_COLOR_INDEX < 0){
                 
                     CURRENT_COLOR_INDEX = colors.length-1;
                 
@@ -33,11 +42,39 @@ void keyPressed(){
             break;    
             case RIGHT:
                 CURRENT_COLOR_INDEX++;
-                if(CURRENT_COLOR_INDEX > colors.length-1)
-                {
+                if(CURRENT_COLOR_INDEX > colors.length-1){
                     
                     CURRENT_COLOR_INDEX = 0;
                     
+                }
+            break;
+            case UP:
+                if(RAINBOW_MODE){
+                
+                    framecounter = int(map(framecounter, 0, frames, 0, frames+10)); // Allows for smooth transitions
+                    frames += 10;
+                    println(frames);
+                
+                }
+            break;
+            case DOWN:
+                if(RAINBOW_MODE){
+                
+                    if(frames <= 10)
+                        break;
+                    framecounter = int(map(framecounter, 0, frames, 0, frames-10)); // Allows for smooth transitions
+                    frames -= 10;
+                    println(frames);
+                
+                }
+            break;
+            case SHIFT:
+                if(RAINBOW_MODE){
+                
+                    framecounter = int(map(framecounter, 0, frames, 0, DEFAULT_RAINBOW_PERIOD)); // Allows for smooth transitions
+                    frames = DEFAULT_RAINBOW_PERIOD;
+                    println(frames);
+                
                 }
             break;
             
@@ -47,14 +84,28 @@ void keyPressed(){
     
         int key_int = (int)key;
         
-        if(key_int >= 49 && key_int <= 54){
+        if(key_int >= 49 && key_int <= 55){
         
             CURRENT_COLOR_INDEX = key_int - 49;
+        
+        }else if(key == 'r'){
+        
+            RAINBOW_MODE = !RAINBOW_MODE;
+            framecounter = 0;
+        
+        }else if(key == ' '){
+        
+            if(RAINBOW_MODE){
+            
+                PAUSE_RAINBOW = !PAUSE_RAINBOW;
+                
+            }
         
         }
     
     }
 
+    
     CURRENT_COLOR = colors[CURRENT_COLOR_INDEX];
 
 }
@@ -82,6 +133,17 @@ void setup(){
 void draw(){
     
     background(0);
+    
+    if(RAINBOW_MODE){
+    
+        if(!PAUSE_RAINBOW)
+            framecounter++;
+            CURRENT_COLOR = get_rainbow_color(framecounter);
+
+        if(framecounter > frames)
+            framecounter = 0;
+    
+    }
     
     matrix.step();
     matrix.draw();

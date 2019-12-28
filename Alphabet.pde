@@ -1,3 +1,8 @@
+/*
+Author: Kuba Gasiorowski
+https://github.com/kgasiorowski/digital-rain
+*/
+
 class Alphabet extends ArrayList<Character>{
     
     public Alphabet(){

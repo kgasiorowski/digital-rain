@@ -1,3 +1,8 @@
+/*
+Author: Kuba Gasiorowski
+https://github.com/kgasiorowski/digital-rain
+*/ 
+
 final int DEFAULT_LIFETIME = 100;
 final int DEFAULT_CASCADETIME = 1;
 

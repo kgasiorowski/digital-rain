@@ -1,3 +1,8 @@
+/*
+Author: Kuba Gasiorowski
+https://github.com/kgasiorowski/digital-rain
+*/
+
 class Cell{
 
     public boolean active;
