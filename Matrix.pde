@@ -48,7 +48,7 @@ void setup(){
     
     fullScreen();
     textSize(cellSide);
-    frameRate(60);
+    frameRate(30);
     stroke(255);
     background(0);
     textAlign(CENTER, CENTER);
