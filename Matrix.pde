@@ -109,9 +109,9 @@ void draw(){
             framecounter = 0;
     }
     
+    matrix.startRow();
     matrix.step();
     matrix.draw();        
-    matrix.startRow();
 }
 
 void putc(char c, int x, int y, color col){
