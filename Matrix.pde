@@ -82,9 +82,8 @@ void keyPressed(){
 }
 
 void setup(){
-    cellSide = displayWidth/175;
-    
-    fullScreen();
+    size(600, 400);
+    cellSide = width/175;
     textSize(cellSide);
     frameRate(30);
     stroke(255);
@@ -97,8 +96,7 @@ void setup(){
     matrix = new CellMatrix(numCols, numRows);
 }
 
-int numFrames = 0;
-int NUM_FRAMES_TO_SAVE = 1000;
+int NUM_FRAMES_TO_SAVE = 300;
 int savedFrames = 0;
 
 void draw(){
@@ -117,15 +115,11 @@ void draw(){
     matrix.step();
     matrix.draw();
     
-    if(numFrames >= NUM_FRAMES_TO_SAVE){
-    
-        saveFrame("img/####.png");
-        savedFrames++;
-    
-        if(savedFrames > NUM_FRAMES_TO_SAVE)
-            exit();
-    
-    }
+    saveFrame("img/####.png");
+    savedFrames++;
+
+    if(savedFrames > NUM_FRAMES_TO_SAVE)
+        exit();
     
 }
 
