@@ -84,7 +84,7 @@ void keyPressed(){
     
         int key_int = (int)key;
         
-        if(key_int >= 49 && key_int <= 55){
+        if(key_int >= 49 && key_int <= 54){
         
             CURRENT_COLOR_INDEX = key_int - 49;
         
