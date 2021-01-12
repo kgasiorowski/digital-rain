@@ -14,7 +14,7 @@ final color RED = color(198,0,0);
 final color BLUE = color(23, 45, 214);
 final color YELLOW = color(198, 175, 0);
 final color PURPLE = color(120, 26, 216);
-final color BRIGHT_BLUE = #4771B4;
+final color BRIGHT_BLUE = #00f7ff;
 
 color CURRENT_COLOR = GREEN;
 int CURRENT_COLOR_INDEX = 0;
