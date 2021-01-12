@@ -110,10 +110,8 @@ void draw(){
     }
     
     matrix.step();
-    matrix.draw();
-    
-    if(random(1) < 0.30)
-        matrix.startRow();
+    matrix.draw();        
+    matrix.startRow();
 }
 
 void putc(char c, int x, int y, color col){
