@@ -3,7 +3,7 @@ Author: Kuba Gasiorowski
 https://github.com/kgasiorowski/digital-rain
 */ 
 
-final int DEFAULT_LIFETIME = 100;
+final int DEFAULT_LIFETIME = 200;
 final int DEFAULT_CASCADETIME = 1;
 
 class CellMatrix{
@@ -27,10 +27,17 @@ class CellMatrix{
     }
     
     void startRow(){
-        int r;
-        do{
-            r = int(random(0, numCols));
-        }while(matrix[r][0].active);
+      
+        ArrayList<Integer> emptyRows = new ArrayList();
+        for(int i = 0; i < numCols; i++){
+            if(!matrix[i][0].active)
+              emptyRows.add(i);
+        }
+      
+        if(emptyRows.size() == 0)
+            return;
+      
+        int r = emptyRows.get(int(random(0, emptyRows.size())));
         
         matrix[r][0].active = true;
         matrix[r][0].lifetime = DEFAULT_LIFETIME;
