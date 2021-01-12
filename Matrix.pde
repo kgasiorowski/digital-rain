@@ -117,5 +117,5 @@ void draw(){
 void putc(char c, int x, int y, color col){
     stroke(col);
     fill(col);
-    text(c, x*cellWidth, (y+.5)*cellHeight);
+    text(c, (x+0.5)*cellWidth, (y+.5)*cellHeight);
 }
