@@ -97,6 +97,10 @@ void setup(){
     matrix = new CellMatrix(numCols, numRows);
 }
 
+int numFrames = 0;
+int NUM_FRAMES_TO_SAVE = 1000;
+int savedFrames = 0;
+
 void draw(){
     background(0);
     if(RAINBOW_MODE){
@@ -111,7 +115,18 @@ void draw(){
     
     matrix.startRow();
     matrix.step();
-    matrix.draw();        
+    matrix.draw();
+    
+    if(numFrames >= NUM_FRAMES_TO_SAVE){
+    
+        saveFrame("img/####.png");
+        savedFrames++;
+    
+        if(savedFrames > NUM_FRAMES_TO_SAVE)
+            exit();
+    
+    }
+    
 }
 
 void putc(char c, int x, int y, color col){
