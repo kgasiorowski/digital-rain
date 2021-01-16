@@ -30,7 +30,7 @@ class CellMatrix{
       
         ArrayList<Integer> emptyRows = new ArrayList();
         for(int i = 0; i < numCols; i++){
-            if(!matrix[i][0].active)
+            if(!matrix[i][0].isActive())
               emptyRows.add(i);
         }
       
@@ -39,10 +39,10 @@ class CellMatrix{
       
         int r = emptyRows.get(int(random(0, emptyRows.size())));
         
-        matrix[r][0].active = true;
-        matrix[r][0].lifetime = DEFAULT_LIFETIME;
-        matrix[r][0].cascadetime = int(random(1,3));
-        matrix[r][0].c = alphabet.getRandChar();
+        matrix[r][0].setIsActive(true);
+        matrix[r][0].setLifeTime(DEFAULT_LIFETIME);
+        matrix[r][0].setCascadeTime(int(random(1,3)));
+        matrix[r][0].setCellCharacter(alphabet.getRandChar());
         
         activeCells.add(new Coordinate(r,0));
     }
@@ -52,39 +52,39 @@ class CellMatrix{
             Cell cell = matrix[coord.x][coord.y];
             
             // Delete the cell if the lifetime is up
-            if(cell.lifetime <= 0){
-                cell.active = false;
+            if(cell.getLifeTime() <= 0){
+                cell.setIsActive(false);
                 cellsToRemoveFromActiveList.add(coord);
                 continue;
             }
         
-            if(cell.cascadetime <= 0){
-                if(coord.y + 1 < matrix[0].length && !matrix[coord.x][coord.y+1].active){
+            if(cell.getCascadeTime() <= 0){
+                if(coord.y + 1 < matrix[0].length && !matrix[coord.x][coord.y+1].isActive()){
                     Cell cellBelow = matrix[coord.x][coord.y+1];
-                    if(!cellBelow.active){
+                    if(!cellBelow.isActive()){
                         cellsToAddToActiveList.add(new Coordinate(coord.x, coord.y+1));
-                        cellBelow.active = true;
-                        cellBelow.lifetime = DEFAULT_LIFETIME;
-                        cellBelow.cascadetime = int(random(1,3));
-                        cellBelow.c = alphabet.getRandChar();
+                        cellBelow.setIsActive(true);
+                        cellBelow.setLifeTime(DEFAULT_LIFETIME);
+                        cellBelow.setCascadeTime(int(random(1,3)));
+                        cellBelow.setCellCharacter(alphabet.getRandChar());
                     }
                 }
             }
         
             if(random(1) < 0.005){
-                cell.c = alphabet.getRandChar();
+                cell.setCellCharacter(alphabet.getRandChar());
             }
         
             /*
             Color the cell here.
             */
-            if(cell.lifetime >= DEFAULT_LIFETIME - DEFAULT_CASCADETIME)
-                cell.col = color(255);
+            if(cell.getLifeTime() >= DEFAULT_LIFETIME - DEFAULT_CASCADETIME)
+                cell.setCellColor(color(255));
             else
-                cell.col = color(red(CURRENT_COLOR), green(CURRENT_COLOR), blue(CURRENT_COLOR), map(cell.lifetime, 0, DEFAULT_LIFETIME, 0, 255));
+                cell.setCellColor(color(red(CURRENT_COLOR), green(CURRENT_COLOR), blue(CURRENT_COLOR), map(cell.getLifeTime(), 0, DEFAULT_LIFETIME, 0, 255)));
             
-            cell.lifetime--;
-            cell.cascadetime--;
+            cell.decrementLifeTime();
+            cell.decrementCascadeTime();
         }
     
         for(Coordinate coord : cellsToRemoveFromActiveList){
@@ -101,7 +101,7 @@ class CellMatrix{
     void draw(){
         for(Coordinate coord : activeCells){
             Cell cell = matrix[coord.x][coord.y];
-            putc(cell.c, coord.x, coord.y, cell.col);
+            putc(cell.getCellCharacter(), coord.x, coord.y, cell.getCellColor());
         }
     }
 }
