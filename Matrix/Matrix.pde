@@ -43,18 +43,16 @@ void keyPressed(){
             break;
             case UP:
                 if(RAINBOW_MODE){
-                    framecounter = int(map(framecounter, 0, frames, 0, frames+10)); // Allows for smooth transitions
-                    frames += 10;
-                    println(frames);
+                    //framecounter = int(map(framecounter, 0, frames, 0, frames+10)); // Allows for smooth transitions
+                    frames *= 2;
                 }
             break;
             case DOWN:
                 if(RAINBOW_MODE){
                     if(frames <= 10)
                         break;
-                    framecounter = int(map(framecounter, 0, frames, 0, frames-10)); // Allows for smooth transitions
-                    frames -= 10;
-                    println(frames);
+                    //framecounter = int(map(framecounter, 0, frames, 0, frames-10)); // Allows for smooth transitions
+                    frames /= 2;
                 }
             break;
             case SHIFT:
@@ -82,9 +80,9 @@ void keyPressed(){
 }
 
 void setup(){
-    cellSide = displayWidth/175;
-    
-    fullScreen();
+    fullScreen();  
+  
+    cellSide = width/175;
     textSize(cellSide);
     frameRate(30);
     stroke(255);
