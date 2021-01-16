@@ -10,9 +10,9 @@ class CellMatrix{
 
     Cell[][] matrix;
     
-    ArrayList<Tuple<Integer>> activeCells;
-    ArrayList<Tuple<Integer>> cellsToRemoveFromActiveList;
-    ArrayList<Tuple<Integer>> cellsToAddToActiveList;
+    ArrayList<Coordinate> activeCells;
+    ArrayList<Coordinate> cellsToRemoveFromActiveList;
+    ArrayList<Coordinate> cellsToAddToActiveList;
     
     public CellMatrix(int x, int y){
         activeCells = new ArrayList();
@@ -44,25 +44,25 @@ class CellMatrix{
         matrix[r][0].cascadetime = int(random(1,3));
         matrix[r][0].c = alphabet.getRandChar();
         
-        activeCells.add(new Tuple(r,0));
+        activeCells.add(new Coordinate(r,0));
     }
     
     void step(){
-        for(Tuple<Integer> t : activeCells){
-            Cell cell = matrix[t.first][t.second];
+        for(Coordinate coord : activeCells){
+            Cell cell = matrix[coord.x][coord.y];
             
             // Delete the cell if the lifetime is up
             if(cell.lifetime <= 0){
                 cell.active = false;
-                cellsToRemoveFromActiveList.add(t);
+                cellsToRemoveFromActiveList.add(coord);
                 continue;
             }
         
             if(cell.cascadetime <= 0){
-                if(t.second + 1 < matrix[0].length && !matrix[t.first][t.second+1].active){
-                    Cell cellBelow = matrix[t.first][t.second+1];
+                if(coord.y + 1 < matrix[0].length && !matrix[coord.x][coord.y+1].active){
+                    Cell cellBelow = matrix[coord.x][coord.y+1];
                     if(!cellBelow.active){
-                        cellsToAddToActiveList.add(new Tuple(t.first, t.second+1));
+                        cellsToAddToActiveList.add(new Coordinate(coord.x, coord.y+1));
                         cellBelow.active = true;
                         cellBelow.lifetime = DEFAULT_LIFETIME;
                         cellBelow.cascadetime = int(random(1,3));
@@ -87,11 +87,11 @@ class CellMatrix{
             cell.cascadetime--;
         }
     
-        for(Tuple<Integer> t : cellsToRemoveFromActiveList){
-            activeCells.remove(t);
+        for(Coordinate coord : cellsToRemoveFromActiveList){
+            activeCells.remove(coord);
         }
-        for(Tuple<Integer> t : cellsToAddToActiveList){
-            activeCells.add(t);
+        for(Coordinate coord : cellsToAddToActiveList){
+            activeCells.add(coord);
         }
     
         cellsToRemoveFromActiveList.clear();
@@ -99,19 +99,19 @@ class CellMatrix{
     }
 
     void draw(){
-        for(Tuple<Integer> t : activeCells){
-            Cell cell = matrix[t.first][t.second];
-            putc(cell.c, t.first, t.second, cell.col);
+        for(Coordinate coord : activeCells){
+            Cell cell = matrix[coord.x][coord.y];
+            putc(cell.c, coord.x, coord.y, cell.col);
         }
     }
 }
 
-class Tuple<T>{
-    public T first;
-    public T second;
+class Coordinate{
+    public Integer x;
+    public Integer y;
     
-    public Tuple(T first, T second){
-        this.first = first;
-        this.second = second;
+    public Coordinate(Integer x, Integer y){
+        this.x = x;
+        this.y = y;
     }
 }
