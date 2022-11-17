@@ -38,10 +38,12 @@ class CellMatrix{
             return;
       
         int r = emptyRows.get(int(random(0, emptyRows.size())));
+        int maxCascadeTime = int(random(1,4));
         
         matrix[r][0].setIsActive(true);
         matrix[r][0].setLifeTime(DEFAULT_LIFETIME);
-        matrix[r][0].setCascadeTime(int(random(1,3)));
+        matrix[r][0].setMaxCascadeTime(maxCascadeTime);
+        matrix[r][0].setCascadeTime(maxCascadeTime);
         matrix[r][0].setCellCharacter(alphabet.getRandChar());
         
         activeCells.add(new Coordinate(r,0));
@@ -65,7 +67,8 @@ class CellMatrix{
                         cellsToAddToActiveList.add(new Coordinate(coord.x, coord.y+1));
                         cellBelow.setIsActive(true);
                         cellBelow.setLifeTime(DEFAULT_LIFETIME);
-                        cellBelow.setCascadeTime(int(random(1,3)));
+                        cellBelow.setCascadeTime(cell.getMaxCascadeTime());
+                        cellBelow.setMaxCascadeTime(cell.getMaxCascadeTime());
                         cellBelow.setCellCharacter(alphabet.getRandChar());
                     }
                 }
